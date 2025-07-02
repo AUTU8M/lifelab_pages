@@ -1,0 +1,3 @@
+blue= rgb(101, 116, 249)
+white= rgb(255, 255, 255)
+text_color= rgb(138, 138, 134)
