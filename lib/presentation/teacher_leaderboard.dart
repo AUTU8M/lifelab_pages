@@ -17,10 +17,19 @@ class _TeacherLeaderboardScreenState extends State<TeacherLeaderboardScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
+        decoration: BoxDecoration(
+          image: const DecorationImage(
             image: AssetImage('assets/backround.png'),
             fit: BoxFit.cover,
+            colorFilter: ColorFilter.mode(
+              Color.fromRGBO(
+                255,
+                255,
+                255,
+                0.50,
+              ), // slightly less overlay for more brightness
+              BlendMode.modulate,
+            ),
           ),
         ),
         child: Column(
@@ -118,25 +127,18 @@ class _TeacherLeaderboardScreenState extends State<TeacherLeaderboardScreen> {
             const SizedBox(height: 10),
 
             Padding(
-              padding: const EdgeInsets.only(bottom: 8.0),
+              padding: const EdgeInsets.only(
+                bottom: 18.0,
+              ), // Increased bottom padding for more gap
               child: SizedBox(
-                height: 150,
+                height: 170,
                 child: Stack(
                   clipBehavior: Clip.none,
                   alignment: Alignment.topCenter,
-                  children: const [
+                  children: [
                     Positioned(
-                      top: 0,
-                      child: LeaderboardTopThree(
-                        rank: '1',
-                        badgeAsset: 'assets/1.png',
-                        name: 'Mr. Negi',
-                        score: '2100',
-                      ),
-                    ),
-                    Positioned(
-                      top: 75,
-                      left: 30,
+                      top: 60,
+                      left: 20,
                       child: LeaderboardTopThree(
                         rank: '2',
                         badgeAsset: 'assets/2.png',
@@ -146,8 +148,19 @@ class _TeacherLeaderboardScreenState extends State<TeacherLeaderboardScreen> {
                       ),
                     ),
                     Positioned(
-                      top: 75,
-                      right: 30,
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      child: LeaderboardTopThree(
+                        rank: '1',
+                        badgeAsset: 'assets/1.png',
+                        name: 'Mr. Negi',
+                        score: '2100',
+                      ),
+                    ),
+                    Positioned(
+                      top: 60,
+                      right: 20,
                       child: LeaderboardTopThree(
                         rank: '3',
                         badgeAsset: 'assets/3.png',
@@ -160,10 +173,12 @@ class _TeacherLeaderboardScreenState extends State<TeacherLeaderboardScreen> {
                 ),
               ),
             ),
-
+            const SizedBox(height: 16),
+            const SizedBox(height: 8),
             Expanded(
               child: ListView.builder(
-                itemCount: 7,
+                padding: EdgeInsets.zero,
+                itemCount: 5,
                 itemBuilder: (context, index) {
                   return GestureDetector(
                     onTap: () {

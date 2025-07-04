@@ -17,10 +17,19 @@ class _SchoolLeaderboardScreenState extends State<SchoolLeaderboardScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
+        decoration: BoxDecoration(
+          image: const DecorationImage(
             image: AssetImage('assets/backround.png'),
             fit: BoxFit.cover,
+            colorFilter: ColorFilter.mode(
+              Color.fromRGBO(
+                255,
+                255,
+                255,
+                0.50,
+              ), // slightly less overlay for more brightness
+              BlendMode.modulate,
+            ),
           ),
         ),
         child: Column(
@@ -119,25 +128,19 @@ class _SchoolLeaderboardScreenState extends State<SchoolLeaderboardScreen> {
             const SizedBox(height: 10),
 
             Padding(
-              padding: const EdgeInsets.only(bottom: 8.0),
+              padding: const EdgeInsets.only(
+                bottom: 18.0,
+              ), // Increased bottom padding for more gap
               child: SizedBox(
-                height: 150,
+                height: 170,
                 child: Stack(
                   clipBehavior: Clip.none,
                   alignment: Alignment.topCenter,
-                  children: const [
+                  children: [
+                    // 2nd place (left)
                     Positioned(
-                      top: 0,
-                      child: LeaderboardTopThree(
-                        rank: '1',
-                        badgeAsset: 'assets/1.png',
-                        schoolName: 'Abc School',
-                        score: '2000',
-                      ),
-                    ),
-                    Positioned(
-                      top: 75,
-                      left: 30,
+                      top: 60,
+                      left: 20,
                       child: LeaderboardTopThree(
                         rank: '2',
                         badgeAsset: 'assets/2.png',
@@ -146,9 +149,22 @@ class _SchoolLeaderboardScreenState extends State<SchoolLeaderboardScreen> {
                         isSecond: true,
                       ),
                     ),
+                    // 1st place (center)
                     Positioned(
-                      top: 75,
-                      right: 30,
+                      top: 0,
+                      left: 0,
+                      right: 0,
+                      child: LeaderboardTopThree(
+                        rank: '1',
+                        badgeAsset: 'assets/1.png',
+                        schoolName: 'Abc School',
+                        score: '2000',
+                      ),
+                    ),
+                    // 3rd place (right)
+                    Positioned(
+                      top: 60,
+                      right: 20,
                       child: LeaderboardTopThree(
                         rank: '3',
                         badgeAsset: 'assets/3.png',
@@ -161,25 +177,31 @@ class _SchoolLeaderboardScreenState extends State<SchoolLeaderboardScreen> {
                 ),
               ),
             ),
+            const SizedBox(height: 16),
+            const SizedBox(height: 8),
 
             Expanded(
-              child: ListView.builder(
-                itemCount: 7,
-                itemBuilder: (context, index) {
-                  return GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        _selectedIndex = index;
-                      });
-                    },
-                    child: LeaderboardListItem(
-                      rank: (index + 4).toString(),
-                      schoolName: 'Abc School',
-                      score: '2000',
-                      isSelected: _selectedIndex == index,
-                    ),
-                  );
-                },
+              child: NotificationListener<ScrollNotification>(
+                onNotification: (_) => false,
+                child: ListView.builder(
+                  padding: EdgeInsets.zero,
+                  itemCount: 4,
+                  itemBuilder: (context, index) {
+                    return GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          _selectedIndex = index;
+                        });
+                      },
+                      child: LeaderboardListItem(
+                        rank: (index + 4).toString(),
+                        schoolName: 'Abc School',
+                        score: '2000',
+                        isSelected: _selectedIndex == index,
+                      ),
+                    );
+                  },
+                ),
               ),
             ),
           ],
@@ -253,8 +275,10 @@ class LeaderboardTopThree extends StatelessWidget {
             color: const Color.fromRGBO(101, 116, 249, 1),
           ),
         ),
+        const SizedBox(height: 4),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
               score,
@@ -265,7 +289,10 @@ class LeaderboardTopThree extends StatelessWidget {
               ),
             ),
             const SizedBox(width: 4),
-            SvgPicture.asset('assets/coin.svg', height: 16),
+            Align(
+              alignment: Alignment.center,
+              child: SvgPicture.asset('assets/coin.svg', height: 18),
+            ),
           ],
         ),
       ],
@@ -297,13 +324,20 @@ class LeaderboardListItem extends StatelessWidget {
       decoration: BoxDecoration(
         color:
             isSelected
-                ? const Color.fromRGBO(120, 182, 218, 0.4)
+                ? const Color.fromRGBO(120, 182, 218, 0.18)
                 : Colors.white,
         borderRadius: BorderRadius.circular(15),
         border:
             isSelected
                 ? Border.all(color: Colors.blue.shade800, width: 2)
                 : null,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.08),
+            blurRadius: 6,
+            offset: const Offset(0, 2),
+          ),
+        ],
       ),
       child: Row(
         children: [
@@ -335,18 +369,21 @@ class LeaderboardListItem extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 15),
-          Text(
-            schoolName,
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 13,
-              color: Color.fromRGBO(101, 116, 249, 1),
+          Expanded(
+            child: Text(
+              schoolName,
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 13,
+                color: Color.fromRGBO(101, 116, 249, 1),
+              ),
+              overflow: TextOverflow.ellipsis,
             ),
           ),
-          const Spacer(),
+          const SizedBox(width: 10),
           Text(score, style: const TextStyle(fontWeight: FontWeight.bold)),
           const SizedBox(width: 4),
-          SvgPicture.asset('assets/coin.svg', height: 16),
+          SvgPicture.asset('assets/coin.svg', height: 18),
         ],
       ),
     );
