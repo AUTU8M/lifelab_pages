@@ -68,6 +68,8 @@ flutter:
     - assets/school.png
     - assets/backround.png
     - assets/profile.png
+    - assets/balloon.png
+    - assets/stars.png
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lifelab_pages/presentation/school_leaderboard.dart';
-import 'package:lifelab_pages/presentation/teacher_leaderboard.dart';
+import 'package:lifelab_pages/presentation/purchase_list_screen.dart';
+import 'package:lifelab_pages/test.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const SchoolLeaderboardScreen(),
+      home: const PurchaseListScreen(),
     );
   }
 }
