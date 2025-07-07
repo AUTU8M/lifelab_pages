@@ -98,3 +98,7 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+  fonts:
+    - family: Edu TAS Beginner
+      fonts:
+        - asset: assets/fonts/EduTASBeginner-VariableFont_wght.ttf

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'bought_product.dart'; // Import the BoughtProduct page
 
 class Products extends StatelessWidget {
   const Products({super.key});
@@ -128,49 +129,63 @@ class Products extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 20),
-              Container(
-                height: 50,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: Colors.white30,
+              Material(
+                color: Colors.white30,
+                borderRadius: BorderRadius.circular(7),
+                child: InkWell(
                   borderRadius: BorderRadius.circular(7),
-                  border: Border.all(color: Colors.blue, width: 1),
-                ),
-                child: Center(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Redeem with  ',
-                        style: TextStyle(
-                          color: Colors.blueAccent,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const BoughtProduct(),
                       ),
-                      Text(
-                        '500',
-                        style: TextStyle(
-                          color: Colors.amber,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      SizedBox(width: 6),
-                      SizedBox(
-                        height: 22,
-                        width: 22,
-                        child: Padding(
-                          padding: EdgeInsets.only(bottom: 2),
-                          child: SvgPicture.asset(
-                            'assets/coin.svg',
-                            height: 20,
-                            width: 20,
+                    );
+                  },
+                  child: Container(
+                    height: 50,
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(7),
+                      border: Border.all(color: Colors.blue, width: 1),
+                    ),
+                    child: Center(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Redeem with  ',
+                            style: TextStyle(
+                              color: Colors.blueAccent,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                        ),
+                          Text(
+                            '500',
+                            style: TextStyle(
+                              color: Colors.amber,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(width: 6),
+                          SizedBox(
+                            height: 22,
+                            width: 22,
+                            child: Padding(
+                              padding: EdgeInsets.only(bottom: 2),
+                              child: SvgPicture.asset(
+                                'assets/coin.svg',
+                                height: 20,
+                                width: 20,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
+                    ),
                   ),
                 ),
               ),

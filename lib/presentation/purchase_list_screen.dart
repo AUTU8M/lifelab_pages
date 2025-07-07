@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lifelab_pages/presentation/product_list.dart';
 import 'package:lifelab_pages/presentation/products.dart';
-import 'package:lifelab_pages/presentation/school_leaderboard.dart';
 
 class PurchaseListScreen extends StatelessWidget {
   const PurchaseListScreen({super.key});
