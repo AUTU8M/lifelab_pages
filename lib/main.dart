@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:lifelab_pages/presentation/purchase_list_screen.dart';
-import 'package:lifelab_pages/test.dart';
 
 void main() {
   runApp(const MyApp());
