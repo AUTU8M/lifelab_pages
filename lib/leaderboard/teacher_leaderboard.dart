@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:lifelab_pages/presentation/school_leaderboard.dart';
+import 'package:lifelab_pages/leaderboard/school_leaderboard.dart';
 
 class TeacherLeaderboardScreen extends StatefulWidget {
   const TeacherLeaderboardScreen({super.key});

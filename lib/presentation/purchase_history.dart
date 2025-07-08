@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:lifelab_pages/presentation/utils/product_list.dart';
-import 'package:lifelab_pages/presentation/products.dart';
+import 'package:flutter_svg/svg.dart';
 
-class PurchaseListScreen extends StatelessWidget {
-  const PurchaseListScreen({super.key});
+class PurchaseHistory extends StatelessWidget {
+  const PurchaseHistory({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,25 +10,30 @@ class PurchaseListScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
+        title: Text(
+          "HOME",
+          style: TextStyle(
+            color: const Color.fromARGB(255, 71, 70, 70),
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.black, size: 30),
           onPressed: () => Navigator.of(context).pop(),
         ),
       ),
-      body: Container(
-        decoration: BoxDecoration(
-          color: const Color(
-            0xFFF7F8FA,
-          ), // Soft off-white background for the whole screen
-        ),
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 20.0,
-                vertical: 10.0,
-              ),
-              child: Row(
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+        child: Container(
+          decoration: BoxDecoration(
+            color: const Color(
+              0xFFF7F8FA,
+            ), // Soft off-white background for the whole screen
+          ),
+          child: Column(
+            children: [
+              Row(
                 children: [
                   Expanded(
                     child: Container(
@@ -132,13 +135,10 @@ class PurchaseListScreen extends StatelessWidget {
                   ),
                 ],
               ),
-            ),
-            SizedBox(height: 10),
-            //blue container with text
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
-              child: Container(
-                height: 40,
+              SizedBox(height: 10),
+              //blue container with text
+              Container(
+                height: 45,
                 width: double.infinity,
                 decoration: BoxDecoration(
                   color: Color.fromRGBO(73, 131, 238, 1),
@@ -146,153 +146,141 @@ class PurchaseListScreen extends StatelessWidget {
                 ),
                 child: Center(
                   child: Text(
-                    'Available Product List',
+                    'Puchase History',
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: 14,
+                      fontSize: 15,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
               ),
-            ),
-            SizedBox(height: 10),
-            Expanded(
-              child: ListView.builder(
-                itemCount: productList.length,
-                itemBuilder: (context, index) {
-                  final product = productList[index];
-                  return ProductWidget(
-                    productName: product['name'],
-                    redeemPoints: product['points'],
-                    redeemstring: product['redeemText'],
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const Products(),
-                        ),
-                      );
-                    },
-                  );
-                },
+              SizedBox(height: 10),
+              //LIst of purchased items
+              Expanded(
+                child: ListView.builder(
+                  itemCount: 4,
+                  itemBuilder:
+                      (context, index) => PurchaseHistoryItem(
+                        imagePath: 'assets/balloon.png',
+                        productName: 'Product Name',
+                        coinsSpent: 200,
+                      ),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
   }
 }
 
-class ProductWidget extends StatelessWidget {
-  final String balloonAssetPath;
-  final String coinAssetPath;
+class PurchaseHistoryItem extends StatelessWidget {
+  final String imagePath;
   final String productName;
-  final int redeemPoints;
-  final String redeemstring;
-  final VoidCallback? onTap;
+  final int coinsSpent;
+  final String coinLabel;
 
-  const ProductWidget({
+  const PurchaseHistoryItem({
     super.key,
-    this.balloonAssetPath = 'assets/balloon.png',
-    this.coinAssetPath = "assets/coin.svg",
-    this.redeemstring = "Redeem With ",
+    required this.imagePath,
     required this.productName,
-    required this.redeemPoints,
-    this.onTap,
+    required this.coinsSpent,
+    this.coinLabel = 'Coin spent for product',
   });
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 12),
-      child: Stack(
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 6),
+      height: 100, // Fixed height
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Color.fromRGBO(101, 116, 249, 0.08),
+            blurRadius: 8,
+            offset: Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Row(
         children: [
-          // Bottom white container (redeem area) with ripple effect
-          Material(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(16),
-            elevation: 2,
-            child: InkWell(
-              borderRadius: BorderRadius.circular(16),
-              onTap: onTap,
-              child: Container(
-                height: 230,
-                width: double.infinity,
-                alignment: Alignment.bottomCenter,
-                padding: const EdgeInsets.only(bottom: 16),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Text(
-                      redeemstring,
-                      style: TextStyle(
-                        color: Color(0xFF6B73FF),
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    Text(
-                      ' $redeemPoints ',
-                      style: const TextStyle(
-                        color: Color(0xFF6B73FF),
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    SvgPicture.asset(
-                      coinAssetPath,
-                      width: 20,
-                      height: 20,
-                      fit: BoxFit.contain,
-                    ),
-                  ],
-                ),
-              ),
+          // Left image
+          ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: Image.asset(
+              imagePath,
+              width: 140, // Increased width
+              height: double.infinity,
+              fit: BoxFit.cover,
             ),
           ),
-          // Blue container overlaying the white one
-          Positioned(
-            top: 0,
-            left: 0,
-            right: 0,
-            child: Container(
-              height: 190,
-              decoration: BoxDecoration(
-                color: const Color(0xFF6B73FF),
-                borderRadius: BorderRadius.circular(16),
-              ),
-              padding: const EdgeInsets.only(bottom: 1),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  Expanded(
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.all(Radius.circular(12)),
-                      child: Image.asset(
-                        balloonAssetPath,
-                        width: double.infinity,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
+          SizedBox(width: 10),
+
+          // Right content
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Product name
+                Text(
+                  productName,
+                  style: TextStyle(
+                    color: Color.fromRGBO(101, 116, 249, 1),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15,
                   ),
-                  const SizedBox(height: 5),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 8.0),
-                    child: Text(
-                      productName,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      textAlign: TextAlign.center,
+                ),
+
+                // Coin info box
+                Container(
+                  width: double.infinity,
+                  padding: EdgeInsets.symmetric(vertical: 6, horizontal: 10),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Color.fromRGBO(101, 116, 249, 1),
+                      width: 1,
                     ),
+                    borderRadius: BorderRadius.circular(8),
+                    color: Colors.white,
                   ),
-                  const SizedBox(height: 5),
-                ],
-              ),
+                  child: Column(
+                    crossAxisAlignment:
+                        CrossAxisAlignment.center, // Center horizontally
+                    children: [
+                      Text(
+                        coinLabel,
+                        style: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w600,
+                          color: Color.fromRGBO(101, 116, 249, 1),
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                      SizedBox(height: 4),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SvgPicture.asset('assets/coin.svg', height: 16),
+                          SizedBox(width: 4),
+                          Text(
+                            coinsSpent.toString(),
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
           ),
         ],

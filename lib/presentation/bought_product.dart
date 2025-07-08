@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:lifelab_pages/presentation/purchase_history.dart';
 
 class BoughtProduct extends StatelessWidget {
   const BoughtProduct({super.key});
@@ -96,8 +97,8 @@ class BoughtProduct extends StatelessWidget {
                         top: -50, // Move stars up a bit more for overlap
                         child: Image.asset(
                           'assets/stars.png',
-                          width: 180, // Increased width for larger stars
-                          height: 90, // Increased height for larger stars
+                          width: 180,
+                          height: 90,
                           fit: BoxFit.contain,
                         ),
                       ),
@@ -117,33 +118,48 @@ class BoughtProduct extends StatelessWidget {
                   Row(
                     children: [
                       Expanded(
-                        child: Container(
-                          height: 60,
-                          padding: const EdgeInsets.all(4.0),
-                          decoration: BoxDecoration(
-                            color: Colors.blueAccent,
-                            borderRadius: BorderRadius.circular(7),
-                            boxShadow: [
-                              BoxShadow(
-                                color: const Color.fromARGB(51, 109, 107, 107),
-                                blurRadius: 6,
-                                offset: const Offset(0, 3),
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const PurchaseHistory(),
                               ),
-                            ],
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const Text(
-                                'Purchase History',
-                                textAlign: TextAlign.center,
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
+                            );
+                          },
+                          child: Container(
+                            height: 60,
+                            padding: const EdgeInsets.all(4.0),
+                            decoration: BoxDecoration(
+                              color: Colors.blueAccent,
+                              borderRadius: BorderRadius.circular(7),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: const Color.fromARGB(
+                                    51,
+                                    109,
+                                    107,
+                                    107,
+                                  ),
+                                  blurRadius: 6,
+                                  offset: const Offset(0, 3),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const Text(
+                                  'Purchase History',
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       ),
@@ -214,7 +230,6 @@ class BoughtProduct extends StatelessWidget {
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
-
                               SizedBox(
                                 height: 22,
                                 width: 22,
