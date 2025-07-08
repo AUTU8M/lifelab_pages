@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lifelab_pages/presentation/purchase_list_screen.dart';
+import 'package:lifelab_pages/presentation/product_list.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: const PurchaseListScreen(),
+      home: const ProductList(),
     );
   }
 }

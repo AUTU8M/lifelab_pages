@@ -168,6 +168,23 @@ class PurchaseHistory extends StatelessWidget {
                       ),
                 ),
               ),
+              SizedBox(height: 8),
+              Text(
+                "Make magic moments with these products",
+                style: TextStyle(
+                  color: Color.fromRGBO(73, 131, 238, 1),
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                ),
+                textAlign: TextAlign.left,
+              ),
+              SizedBox(height: 10),
+              // LowBalance Item (formerly MagicProductItem)
+              LowBalance(
+                imagePath: 'assets/balloon.png',
+                productName: 'Product Name',
+                coinsSpent: 150,
+              ),
             ],
           ),
         ),
@@ -278,6 +295,157 @@ class PurchaseHistoryItem extends StatelessWidget {
                         ],
                       ),
                     ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// Rename MagicProductItem to LowBalance
+class LowBalance extends StatelessWidget {
+  final String imagePath;
+  final String productName;
+  final int coinsSpent;
+  final String coinLabel;
+
+  const LowBalance({
+    super.key,
+    required this.imagePath,
+    required this.productName,
+    required this.coinsSpent,
+    this.coinLabel = 'You need ',
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 6),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Color.fromRGBO(101, 116, 249, 0.08),
+            blurRadius: 8,
+            offset: Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Row(
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: Image.asset(
+              imagePath,
+              width: 140,
+              height:
+                  100, // Use a fixed height for the image to match the card and avoid layout issues
+              fit: BoxFit.cover,
+            ),
+          ),
+          SizedBox(width: 10),
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  productName,
+                  style: TextStyle(
+                    color: Color.fromRGBO(101, 116, 249, 1),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 15,
+                  ),
+                ),
+                SizedBox(height: 6),
+                Container(
+                  width: double.infinity,
+                  padding: EdgeInsets.symmetric(vertical: 6, horizontal: 10),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Color.fromRGBO(101, 116, 249, 1),
+                      width: 1,
+                    ),
+                    borderRadius: BorderRadius.circular(8),
+                    color: Colors.white,
+                  ),
+
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      RichText(
+                        textAlign: TextAlign.center,
+                        text: TextSpan(
+                          style: TextStyle(
+                            fontSize: 13,
+                            fontWeight: FontWeight.w600,
+                            color:
+                                Colors.grey, // Set all text to grey by default
+                          ),
+                          children: [
+                            TextSpan(text: 'You need '),
+                            WidgetSpan(
+                              alignment: PlaceholderAlignment.middle,
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    '$coinsSpent',
+                                    style: TextStyle(
+                                      color:
+                                          Colors
+                                              .amber, // Amber color for coin spent
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 13,
+                                    ),
+                                  ),
+                                  SizedBox(width: 2),
+                                  SvgPicture.asset(
+                                    'assets/coin.svg',
+                                    height: 14,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            TextSpan(text: '\nmore coins'),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 4),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color.fromRGBO(73, 131, 238, 1),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      padding: EdgeInsets.symmetric(
+                        vertical: 6,
+                      ), // Decreased vertical padding
+                      minimumSize: Size(
+                        0,
+                        32,
+                      ), // Minimum height for a more compact button
+                      elevation: 0,
+                    ),
+                    child: Text(
+                      'assign Challange',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 14, // Slightly smaller font
+                      ),
+                    ),
                   ),
                 ),
               ],

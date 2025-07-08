@@ -3,8 +3,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lifelab_pages/presentation/utils/product_list.dart';
 import 'package:lifelab_pages/presentation/products.dart';
 
-class PurchaseListScreen extends StatelessWidget {
-  const PurchaseListScreen({super.key});
+class ProductList extends StatelessWidget {
+  const ProductList({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -138,7 +138,7 @@ class PurchaseListScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: Container(
-                height: 40,
+                height: 45,
                 width: double.infinity,
                 decoration: BoxDecoration(
                   color: Color.fromRGBO(73, 131, 238, 1),
@@ -162,7 +162,7 @@ class PurchaseListScreen extends StatelessWidget {
                 itemCount: productList.length,
                 itemBuilder: (context, index) {
                   final product = productList[index];
-                  return ProductWidget(
+                  return ProductItem(
                     productName: product['name'],
                     redeemPoints: product['points'],
                     redeemstring: product['redeemText'],
@@ -185,7 +185,7 @@ class PurchaseListScreen extends StatelessWidget {
   }
 }
 
-class ProductWidget extends StatelessWidget {
+class ProductItem extends StatelessWidget {
   final String balloonAssetPath;
   final String coinAssetPath;
   final String productName;
@@ -193,7 +193,7 @@ class ProductWidget extends StatelessWidget {
   final String redeemstring;
   final VoidCallback? onTap;
 
-  const ProductWidget({
+  const ProductItem({
     super.key,
     this.balloonAssetPath = 'assets/balloon.png',
     this.coinAssetPath = "assets/coin.svg",
