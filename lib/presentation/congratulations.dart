@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:lifelab_pages/presentation/earn_more_coins.dart';
 import 'package:lifelab_pages/presentation/purchase_history.dart';
 import 'package:lifelab_pages/presentation/product_list.dart';
 
@@ -207,7 +208,7 @@ class BoughtProduct extends StatelessWidget {
                       ),
                     ],
                   ),
-                  SizedBox(height: 20),
+                  SizedBox(height: 30),
                   Material(
                     color: Colors.white30,
                     borderRadius: BorderRadius.circular(7),
@@ -217,7 +218,7 @@ class BoughtProduct extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const BoughtProduct(),
+                            builder: (context) => const EarnMoreCoins(),
                           ),
                         );
                       },

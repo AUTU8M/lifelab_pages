@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'bought_product.dart'; // Import the BoughtProduct page
+import 'congratulations.dart'; // Import the BoughtProduct page
 
 class Products extends StatelessWidget {
   const Products({super.key});

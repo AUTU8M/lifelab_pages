@@ -306,7 +306,6 @@ class PurchaseHistoryItem extends StatelessWidget {
   }
 }
 
-// Rename MagicProductItem to LowBalance
 class LowBalance extends StatelessWidget {
   final String imagePath;
   final String productName;
